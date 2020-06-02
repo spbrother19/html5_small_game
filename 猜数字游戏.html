@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <style>
+        .box {
+            width: 500px;
+            margin: 100px auto;
+            border: black solid 1px;
+            text-align: center;
+            background-color: rgb(220, 248, 204);
+        }
+        
+        #tip {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <p>每次刷新页面，会有一个新的整数在[1,16]之间等你来猜</p>
+        <hr>
+        <span>输入你猜测的数字</span>
+        <input type="text" id="guess">
+        <br>
+        <button id="btn">确定</button>
+        <hr>
+        <span id="tip">这里将会是提示你猜的是偏大还是偏小</span>
+    </div>
+    <script>
+        var num = Math.floor(Math.random() * 16 + 1);
+        var btn = $("#btn");
+        var tip = $("#tip");
+        var guess = $("#guess");
+
+        // 打印出来好调试
+        console.log(num);
+
+
+        btn.click(function() {
+            // 输入检测
+            if (isNaN(guess.val())) {
+                alert("只能输入数字");
+            } else {
+                if (parseInt(guess.val()) == num) {
+                    tip.text("猜对了，本次答案是" + num);
+                } else if (parseInt(guess.val()) > num) {
+                    tip.text("猜得偏大了");
+                } else {
+                    tip.text("猜得偏小了");
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

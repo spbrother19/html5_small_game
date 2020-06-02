@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .box {
+            text-align: center;
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            border: black solid 1px;
+        }
+        
+        .checkerboard {
+            width: 282px;
+            height: 282px;
+            background-color: gray;
+            border: black solid 1px;
+            margin: auto;
+        }
+        
+        .dot {
+            text-align: center;
+            font-size: 60px;
+            float: left;
+            width: 80px;
+            height: 80px;
+            border: solid 1px black;
+            background-color: pink;
+            margin-top: 9px;
+            margin-left: 9px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h1 id="tip">X先走，O后走</h1>
+        <hr>
+        <div class="checkerboard">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+        <hr>
+        <button id="btn">点我重新开始</button>
+    </div>
+
+    <script>
+        // 在该网页禁用选择文本
+        document.onselectstart = function() {
+            event.returnValue = false;
+        }
+
+        // 现在下棋的颜色
+        var turn = "X";
+        // 提示信息
+        var tip = $("#tip");
+        // 绑定重置按钮
+        var btn = $("#btn");
+        // 改变棋子颜色
+        var change_turn = function(now) {
+            if (now == "X") {
+                return "O";
+            } else {
+                return "X"
+            }
+        }
+
+        // 点击棋盘下棋事件
+        $('.dot').each(function(key, value) {
+            $(this).click(function() {
+                // 首先判断棋盘是否有子
+                if ($(this).text() == "") {
+                    $(this).text(turn);
+                    turn = change_turn(turn);
+                    tip.text("轮到" + turn + "下棋")
+                } else {
+                    // 提醒已经有棋子了
+                    alert("那个位置上已经有棋子了")
+                }
+            })
+        });
+
+        // 重置游戏
+        btn.click(function() {
+            turn = "X";
+            tip.text("X先走，O后走");
+            $(".dot").each(function() {
+                $(this).text("");
+            })
+        });
+    </script>
+</body>
+
+</html>

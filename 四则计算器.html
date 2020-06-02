@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <style>
+        select {
+            width: 4em;
+            height: 3em;
+            font-size: larger;
+        }
+        
+        .box {
+            width: 800px;
+            height: 360px;
+            margin: 100px auto;
+            text-align: center;
+            border: 1px solid black;
+            background-color: rgb(229, 197, 147);
+        }
+        
+        body {
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 加减乘除计算器2020/6/1 -->
+    <div class="box">
+        <h1>计算器</h1>
+        <span>仅支持简单的加减乘除运算</span>
+        <hr>
+        <span>操作数1</span><input type="text" id="num1">
+        <br>
+        <span>操作符</span>
+        <select name="" id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+        <br>
+        <span>操作数2</span>
+        <input type="text" id="num2">
+        <br>
+        <span>结果</span>
+        <input type="text" readonly="readonly" id="result">
+        <hr>
+        <button id="calc">点我开始运算</button>
+        <button id="reset">点我重置运算</button>
+    </div>
+    <script>
+        var num1 = $("#num1");
+        var num2 = $("#num2");
+        var operator = $("#operator");
+        var calc = $("#calc");
+        var reset = $("#reset");
+        var result = $("#result");
+        var num3;
+        // 重置所有输入框
+        reset.click(function() {
+            num1.val("");
+            num2.val("");
+            result.val("");
+        })
+        calc.click(function() {
+            // 检验是否是数字
+            if (isNaN(num1.val()) || isNaN(num2.val())) {
+                alert("操作数必须是数字");
+            } else {
+                // 分类四则运算
+                switch (operator.val()) {
+                    case "+":
+                        num3 = parseFloat(num1.val()) + parseFloat(num2.val());
+                        break;
+                    case "-":
+                        num3 = parseFloat(num1.val()) - parseFloat(num2.val());
+                        break;
+                    case "*":
+                        num3 = parseFloat(num1.val()) * parseFloat(num2.val());
+                        break;
+                    case "/":
+                        num3 = parseFloat(num1.val()) / parseFloat(num2.val());
+                        break;
+                }
+                result.val(num3);
+
+            }
+        })
+    </script>
+</body>
+
+</html>
